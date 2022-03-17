@@ -3,6 +3,7 @@ package de.fabilucius.advancedperks.perks;
 import com.google.common.collect.Lists;
 import de.fabilucius.advancedperks.AdvancedPerks;
 import de.fabilucius.advancedperks.commons.NullSafety;
+import de.fabilucius.sympel.configuration.value.types.SingleValue;
 import de.fabilucius.sympel.multiversion.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -122,5 +123,11 @@ public abstract class AbstractPerk implements Perk {
     @Override
     public void setMinimumServerVersion(ServerVersion minimumServerVersion) {
         this.minimumServerVersion = minimumServerVersion;
+    }
+
+    @Override
+    public SingleValue<Double> getPrice() {
+        return new SingleValue<>(AdvancedPerks.getPerksConfiguration(),this.getIdentifier()+".Price",
+                "The amount of currency this perk should cost.",Double.class,-1.0D);
     }
 }
